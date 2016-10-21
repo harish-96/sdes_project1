@@ -41,13 +41,17 @@ anim = animation.FuncAnimation(fig1, animate, init_func=init,
                                frames=nTime, blit=True,
                                interval=100 * tmax / nTime)
 
+if not os.path.exists('../output'):
+    os.mkdir('../output')
+
 plt.figure(1)
 plt.plot(np.linspace(0, tmax, nTime + 1), y)
+plt.savefig("../output/trajectory.png")
 
 plt.figure(2)
 plt.plot([y[i][0] for i in range(len(y))],
          [y[i][1] for i in range(len(y))])
-
+plt.savefig("../output/phase_portrait.png")
 plt.show()
 
 # lines = [ax1.plot([], [])[0] for _ in range(2)]
@@ -65,7 +69,7 @@ plt.show()
 #     lines[0].set_data([], [])
 #     lines[1].set_data([], [])
 #     return lines
-
 # anim = animation.FuncAnimation(fig1, animate, init_func=init,
 #                                frames=nTime, blit=True,
 #                                interval=100 * tmax / nTime)
+

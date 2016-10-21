@@ -16,7 +16,8 @@ class TestVanderPol(unittest.TestCase):
         self.assertRaises(TypeError, VdpOscillator, [0, 1, 1], 1.0)
 
     def test_update_state_leaves_state_unchanged_after_zero_time(self):
-        self.assertListEqual(self.osc.state, self.osc.update_step(0))
+        np.testing.assert_array_almost_equal(self.osc.state,
+                                             self.osc.update_step(0))
 
     def test_get_trajectory_leaves_state_unchanged_after_zero_time(self):
         self.assertListEqual(self.osc.state,

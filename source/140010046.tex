@@ -1,0 +1,68 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{parskip}
+
+
+\title{SDES}
+\author{Harish Murali}
+\date{October 2016}
+
+\setlength{\parskip}{10pt}
+\begin{document}
+
+\maketitle
+%\vspace*{-2cm}
+\section{Introduction}
+This report is a part of the submission for a course project on Van der Pol oscillator in the course on Software Development Tools for Engineers and Scientists. The code to solve the equations is written in Python programming language.
+The Van der Pol oscillator is a non-conservative oscillator with non-linear damping. It evolves according to the second order linear differential equation
+\begin{equation}
+\frac{d^2x}{dt^2} - \mu(1 - x^2)\frac{dx}{dt} + x = 0
+\end{equation}
+where x is the position coordinate -- which is a function of time t, and $\mu$ is a scalar parameter indicating non linearity in the strength of the damping.
+
+In a Van der Pol oscillator, energy is dissipated at low amplitudes and generated at high amplitudes. Thus, there exists a stable state around which the dissipation an generation of energies balance. It can be proved that for a given $\mu$, every trajectory eventually converges to this stable cycle. 
+
+The Van der Pol equation finds its applications in several fields of physics and biology. It is also used to model geological faults in seismology. It is generally
+
+\section{Results}
+
+The following plots have been obtained solving the differential equation with the initial conditions of %$\mu = 0.5$, $x = 0$ and $\dot{x} = 1$
+
+\begin{align*}
+    \mu &= 0.5 \\
+    x &= 0 \\
+    \dot{x} &= 1
+\end{align*}
+
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{"../output/trajectory"}
+\caption{} % add caption
+\label{trajectory}
+\end{figure}
+\newpage
+
+The phase space diagram for the Van der Pol oscillator for the same initial conditions is
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{"../output/phase_portrait"}
+\caption{} % add caption
+\label{phaseportrait}
+\end{figure}
+
+
+\section{Installation Instructions}
+
+The following are the dependencies, please refer to the well documented installation instructions for these online:
+\begin{itemize}
+	\item Python 3 or above
+	\item Numpy
+	\item Scipy
+	\item Matplotlib
+\end{itemize}
+
+With these installed, go to the download directory and in the bash terminal, type make.
+To edit the parameters of the Van der Pol oscillator, make changes to the input.csv file in the required columns.
+
+\end{document}
