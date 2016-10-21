@@ -25,9 +25,9 @@ class VdpOscillator:
 
     def vdp_diff(self, state, t):
         """compute the derivative of the given state"""
-        dydt = state[1]
-        dy2dt = self.mu * (1 - state[0]**2) * state[1] - state[0]
-        return [dydt, dy2dt]
+        dxdt = state[1]
+        dx2dt = self.mu * (1 - state[0]**2) * state[1] - state[0]
+        return [dxdt, dx2dt]
 
     def update_step(self, dt):
         """Compute the state of the system after one time step and update it"""
@@ -42,8 +42,8 @@ class VdpOscillator:
         which defaults to the instance state"""
         if "state" in kwargs:
             self.state = kwargs["state"]
-        y = [np.asarray(self.state)]
+        x = [np.asarray(self.state)]
         for i in range(nTime):
             self.update_step(tmax / nTime)
-            y.append(self.state)
-        return y
+            x.append(self.state)
+        return x

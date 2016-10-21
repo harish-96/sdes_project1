@@ -1,2 +1,2 @@
-mu, y_intial, y_dot_intial, tmax, nTime
-0.5, 1, 1, 40, 500
+mu, x_intial, x_dot_intial, tmax, nTime
+0.5, 0.0, 1.0, 40, 500

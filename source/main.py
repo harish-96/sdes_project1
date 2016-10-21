@@ -16,10 +16,13 @@ with open(os.path.join(".", "input.csv"), 'r') as f:
 
 nTime = int(nTime)
 osc = VdpOscillator(state, mu)
-y = osc.get_trajectory(tmax, nTime)
+x = osc.get_trajectory(tmax, nTime)
 
 fig1 = plt.figure(0)
 ax1 = plt.axes(xlim=(-4, 4), ylim=(-2, 2))
+ax1.set_title('An animation of the Van der Pol oscillator')
+ax1.set_xlabel('Spatial x-axis')
+ax1.set_ylabel('Spatial y-axis')
 line = ax1.plot([], [])[0]
 
 
@@ -27,7 +30,7 @@ def animate(i):
     """ Function that is called at each iteration of the animation.
     Sets the current position of the line
     """
-    line.set_data([0, y[i][0]], [0, 0])
+    line.set_data([0, x[i][0]], [0, 0])
     return line,
 
 
@@ -44,13 +47,34 @@ anim = animation.FuncAnimation(fig1, animate, init_func=init,
 if not os.path.exists('../output'):
     os.mkdir('../output')
 
+anim.save('../output/vanderpol_animation.mp4', fps=30,
+          extra_args=['-vcodec', 'libx264'])
+
+pos, vel = zip(*x)
 plt.figure(1)
-plt.plot(np.linspace(0, tmax, nTime + 1), y)
+plt.plot(np.linspace(0, tmax, nTime + 1), pos, label='Position')
+plt.plot(np.linspace(0, tmax, nTime + 1), vel, label='Velocity')
+plt.title('The position and velocity of the Van der Pol oscillator'
+          'for the\n initial conditions $\mu$ = '
+          '%.2f, $x = %.2f$ and $\dot{x} = %.2f$' % (mu, state[0], state[1]))
+
+plt.xlabel('Time')
+plt.ylabel('$x$, $\dot{x}$', fontsize=18)
+plt.legend()
+plt.xlim([0, tmax])
+plt.ylim([-3, 3])
 plt.savefig("../output/trajectory.png")
 
 plt.figure(2)
-plt.plot([y[i][0] for i in range(len(y))],
-         [y[i][1] for i in range(len(y))])
+plt.plot(pos, vel)
+plt.title('The phase portrait of the Van der Pol oscillator'
+          'for the\n initial conditions $\mu$ = '
+          '%.2f, $x = %.2f$ and $\dot{x} = %.2f$' % (mu, state[0], state[1]))
+
+plt.xlabel('Time')
+plt.ylabel('$x$, $\dot{x}$', fontsize=18)
+plt.xlim([-3, 3])
+plt.ylim([-3, 3])
 plt.savefig("../output/phase_portrait.png")
 plt.show()
 
@@ -72,4 +96,3 @@ plt.show()
 # anim = animation.FuncAnimation(fig1, animate, init_func=init,
 #                                frames=nTime, blit=True,
 #                                interval=100 * tmax / nTime)
-

@@ -1,5 +1,5 @@
 
-all: ../output/trajectory.png ../output/phase_portrait.png ../output/Report.pdf
+all: ../output/trajectory.png ../output/phase_portrait.png ../output/140010046.pdf ../output/vanderpol_animation.mp4
 
 ../output/trajectory.png: main.py vdp_osc.py input.csv
 	python main.py
@@ -7,5 +7,8 @@ all: ../output/trajectory.png ../output/phase_portrait.png ../output/Report.pdf
 ../output/phase_portrait.png: main.py vdp_osc.py input.csv
 	python main.py
 
-../output/Report.pdf: ../output/phase_portrait.png Report.tex
-	pdflatex --output-directory=../output Report.tex
+../output/vanderpol_animation.mp4: main.py vdp_osc.py input.csv
+	python main.py
+
+../output/140010046.pdf: ../output/phase_portrait.png 140010046.tex
+	pdflatex --output-directory=../output 140010046.tex

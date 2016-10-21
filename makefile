@@ -9,6 +9,7 @@ test:
 clean:
 	rm -rf output
 	rm -rf source/__pycache__
+	rm -f source/*.pyc source/*.aux source/*.log source/*.pdf
 
 help:
 	@echo 'Run "make test" to run the tests on python code'
